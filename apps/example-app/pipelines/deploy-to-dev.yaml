@@ -2,8 +2,3 @@
 from: deploy-to-nonprod.yaml
 
 # overrides
-trigger:
-  enabled: true
-
-notifications:
-  enabled: true

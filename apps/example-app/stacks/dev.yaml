@@ -1,0 +1,4 @@
+# inherit from global/stacks
+from: nonprod.yaml
+
+# overrides

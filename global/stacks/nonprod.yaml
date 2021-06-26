@@ -1,9 +1,11 @@
-cluster: minikube
-namespace: int
+# metadata
+cluster: my-first-cluster
+namespace: dev
 chart:
   type: example
-  version: 0.1.0
+  version: 0.1.2
 
+# app config
 replicaCount: 1
 
 image:

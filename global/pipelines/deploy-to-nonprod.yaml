@@ -2,10 +2,10 @@ stages:
 
   - name: deploy
     steps:
-      - name: deploy-to-int
+      - name: deploy-to-dev
         command:
           type: deploy
-          stack: int
+          stack: dev
           timeout: 120
 
 notifications:
@@ -13,4 +13,3 @@ notifications:
   events: started,finished
   provider: slack
   channels: devops
-  
