@@ -1,0 +1,24 @@
+cluster: minikube
+namespace: int
+chart:
+  type: example
+  version: 0.1.0
+
+replicaCount: 1
+
+image:
+  pullPolicy: Always
+
+service:
+  type: ClusterIP
+  port: 80
+  internalPort: 8080
+  healthCheckPath: /
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi

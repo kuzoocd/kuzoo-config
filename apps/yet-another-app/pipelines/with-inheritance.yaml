@@ -1,0 +1,9 @@
+# inherit from global/pipelines
+from: deploy-to-nonprod.yaml
+
+# overrides
+trigger:
+  enabled: true
+
+notifications:
+  enabled: true

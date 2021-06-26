@@ -1,0 +1,36 @@
+stages:
+  
+  - name: slack-notify
+    steps:
+      - name: slack-post
+        command:
+          type: external
+          image: kuzoo-scripts:0.1.0
+          cluster: minikube
+          namespace: batch
+          run: [ "./slack-post.sh" ]
+          timeout: 120
+          env:
+            - name: SLACK_TOKEN
+              value: ${SLACK_TOKEN}
+            - name: SLACK_CHANNEL
+              value: devops
+            - name: SLACK_MESSAGE
+              value: message from kuzoo external command in pipeline
+  - name: deploy-to-int
+    steps:
+      - name: deploy-to-int
+        condition:
+          type: external
+          stage: slack-notify
+          step: slack-post
+          value: success
+        command:
+          type: deploy
+          stack: int
+          timeout: 120
+
+notifications:
+  enabled: false
+  events: started,blocked,finished
+  channels: devops
