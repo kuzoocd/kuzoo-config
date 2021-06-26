@@ -3,7 +3,7 @@ cluster: my-first-cluster
 namespace: dev
 chart:
   type: example
-  version: 0.1.2
+  version: 0.1.1
 
 # app config
 replicaCount: 1
