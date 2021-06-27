@@ -1,3 +1,6 @@
+image:
+  provider: dockerhub1
+
 stages:
 
   - name: deploy
