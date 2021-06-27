@@ -11,5 +11,5 @@ stages:
 notifications:
   enabled: false
   events: started,finished
-  provider: slack
+  provider: slack1
   channels: devops

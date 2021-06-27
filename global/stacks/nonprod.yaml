@@ -2,6 +2,7 @@
 cluster: my-first-cluster
 namespace: dev
 chart:
+  provider: helmChartRepo1
   type: example
   version: 0.1.1
 
@@ -9,6 +10,8 @@ chart:
 replicaCount: 1
 
 image:
+  provider: dockerhub1
+  registry: kuzoocd
   pullPolicy: Always
 
 service:
