@@ -1,0 +1,114 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kuzoo-integrator
+data:
+  integrator.yaml: |
+    # kuzoo integrator config
+    # at run time, values can be overriden by environment variables, which may be sourced from kubernetes secrets
+    # a mechanism to use secrets sourced from a secrets manager / vault is also available
+    # as a convention, use the same camelcase names as in this yaml, though all uppercase will work as well
+    # e.g.
+    # kuzooIntegratorToken
+    # configRepo_personalAccessToken
+    # helmChartRepos_mycharts_URL
+    # notificationProviders_myslack_token
+    #
+    # HELMCHARTREPOS_MYCHARTS_URL will work as well
+    #
+
+    # kuzoo hub
+    kuzooHubURL: http://kuzoo.com:3000
+    kuzooAccount: {{ your kuzoo account name, e.g. mycompany }}
+    kuzooIntegratorToken: {{ your kuzoo integrator token - visible under "Manage Account" menu option for administrators }}
+
+    # config repo (only one allowed)
+    # types currently supported - github
+    configRepo:
+      type: github
+      personalAccessToken: inject
+      orgName: {{ your github organization name, e.g. mycompany }}
+      repoName: {{ your github repository name for kuzoo configuration, e.g. kuzoo-config }}
+      branch: {{ branch of the above repository that kuzoo will pull configuration from, e.g. main or master }}
+
+    # helm chart repos (multiple allowed) - the appropriate one will be used based on the value in the stack yaml
+    helmChartRepos:
+      {{ helm chart repo name }}:
+        URL: {{ helm chart repo URL }}
+      # mycharts:
+      #   URL: {{ helm chart repo URL }}
+
+    # container image registries (multiple allowed) - the appropriate one will be used based on the value in the stack yaml
+    # types currently supported - dockerhub
+    containerImageRegistries:
+      {{ container image registry name}}:
+        type: dockerhub
+        account: {{ dockerhub account }}
+      # myimages:
+      #   type: dockerhub
+      #   account: {{ dockerhub account }}
+
+    # notification providers (multiple allowed) - the appropriate one will be used based on the value in the pipeline yaml
+    # types currently supported - slack
+    notificationProviders:
+      {{ notification provider name}}:
+        type: slack
+        token: {{ slack bot token }}
+      # myslack:
+      #   type: slack
+      #   token: {{ slack bot token}}
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kuzoo-integrator
+  namespace: kuzoo
+  labels:
+    app.kubernetes.io/name: kuzoo-integrator
+    app.kubernetes.io/instance: kuzoo-integrator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: kuzoo-integrator
+      app.kubernetes.io/instance: kuzoo-integrator
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: kuzoo-integrator
+        app.kubernetes.io/instance: kuzoo-integrator
+    spec:
+      containers:
+        - name: kuzoo-integrator
+          image: "kuzoocd/kuzoo-integrator:0.1.0"
+          imagePullPolicy: Always
+          livenessProbe:
+            exec:
+              command:
+              - cat
+              - /kuzoo/config/integrator.yaml
+          readinessProbe:
+            exec:
+              command:
+              - cat
+              - /kuzoo/config/integrator.yaml
+          resources:
+            limits:
+              cpu: 300m
+              memory: 512Mi
+            requests:
+              cpu: 300m
+              memory: 512Mi
+          volumeMounts:
+          - name: config
+            mountPath: "/kuzoo/config"
+            readOnly: true
+      volumes:
+      - name: config
+        configMap:
+          name: kuzoo-integrator
+          items:
+          - key: "integrator.yaml"
+            path: "integrator.yaml"

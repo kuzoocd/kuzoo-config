@@ -1,0 +1,112 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: kuzoo
+  namespace: kuzoo
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  annotations:
+  labels:
+  name: kuzoo
+rules:
+- apiGroups:
+  - '*'
+  resources:
+  - ["deployments","replicasets","pods","services","endpoints","ingresses","configmaps","horizontalpodautoscalers"]
+  verbs:
+  - '*'
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  annotations:
+  labels:
+  name: kuzoo
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: kuzoo
+subjects:
+- kind: ServiceAccount
+  name: kuzoo
+  namespace: kuzoo
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kuzoo-agent
+data:
+  agent.yaml: |
+    # kuzoo agent config
+    # at run time, values can be overriden by environment variables, which may be sourced from kubernetes secrets
+    # a mechanism to use secrets sourced from a secrets manager / vault is also available
+    # as a convention, use the same camelcase names as in this yaml, though all uppercase will work as well
+    # e.g.
+    # kuzooAgentToken or KUZOOAGENTTOKEN
+    #
+
+    kuzooHubURL: http://kuzoo.com:3000
+    kuzooAccount: {{ your kuzoo account name, e.g. mycompany }}
+    kuzooAgentCluster: {{ your cluster name for this agent instance - visible under "Manage Clusters" menu option for administrators }}
+    kuzooAgentToken: {{ your agent token for this cluster - visible under "Manage Clusters" menu option for administrators }}
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kuzoo-agent
+  namespace: kuzoo
+  labels:
+    app.kubernetes.io/name: kuzoo-agent
+    app.kubernetes.io/instance: kuzoo-agent
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: kuzoo-agent
+      app.kubernetes.io/instance: kuzoo-agent
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: kuzoo-agent
+        app.kubernetes.io/instance: kuzoo-agent
+    spec:
+      serviceAccountName: kuzoo
+      containers:
+        - name: kuzoo-agent
+          image: "gvbusa/kuzoo-agent:0.1.0"
+          imagePullPolicy: Always
+          livenessProbe:
+            exec:
+              command:
+              - cat
+              - /kuzoo/config/agent.yaml
+          readinessProbe:
+            exec:
+              command:
+              - cat
+              - /kuzoo/config/agent.yaml
+          resources:
+            limits:
+              cpu: 300m
+              memory: 512Mi
+            requests:
+              cpu: 300m
+              memory: 512Mi
+          volumeMounts:
+          - name: config
+            mountPath: "/kuzoo/config"
+            readOnly: true
+      volumes:
+      - name: config
+        configMap:
+          name: kuzoo-agent
+          items:
+          - key: "agent.yaml"
+            path: "agent.yaml"
