@@ -11,6 +11,7 @@ replicaCount: 1
 
 image:
   provider: dockerhub1
+  regex: .*
   pullPolicy: Always
 
 service:

@@ -1,5 +1,6 @@
 image:
   provider: dockerhub1
+  regex: .*
 
 stages:
 
