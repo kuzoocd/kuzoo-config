@@ -1,0 +1,13 @@
+# inherit from global/pipelines
+from: deploy-to-nonprod.yaml
+
+# overrides
+trigger:
+  name: hourly
+  type: cron
+  enabled: false
+  expr: 0 */3 * * * *
+  build: 0.1.8
+
+notifications:
+  enabled: false

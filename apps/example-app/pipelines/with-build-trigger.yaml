@@ -1,0 +1,13 @@
+# inherit from global/pipelines
+from: deploy-to-nonprod.yaml
+
+# overrides
+trigger:
+  name: onbuild
+  type: build
+  enabled: false
+  regex: .*
+
+
+notifications:
+  enabled: false
