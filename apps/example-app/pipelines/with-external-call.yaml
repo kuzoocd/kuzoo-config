@@ -1,0 +1,24 @@
+# inherit from global/pipelines
+from: deploy-to-nonprod.yaml
+
+# overrides
+stages:
+
+  - name: slack-notify
+    order: 5
+    steps:
+      - name: slack-post
+        command:
+          type: external
+          image: kuzoo-scripts:0.1.0
+          cluster: my-first-cluster
+          namespace: batch
+          run: [ "./slack-post.sh" ]
+          timeout: 120
+          env:
+            - name: SLACK_TOKEN
+              value: ${SLACK_TOKEN}
+            - name: SLACK_CHANNEL
+              value: devops
+            - name: SLACK_MESSAGE
+              value: message from kuzoo external command in pipeline
