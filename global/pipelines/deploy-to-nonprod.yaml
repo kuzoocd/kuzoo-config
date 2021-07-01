@@ -6,8 +6,16 @@ image:
 
 stages:
 
-  - name: deploy
+  - name: approve
     order: 10
+    steps:
+      - name: approve-pipeline
+        command:
+          type: approve
+          timeout: 3600
+
+  - name: deploy
+    order: 20
     steps:
       - name: deploy-to-dev
         command:
