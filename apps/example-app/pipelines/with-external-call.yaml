@@ -1,7 +1,3 @@
-# inherit from global/pipelines
-from: deploy-to-nonprod.yaml
-
-# overrides
 stages:
 
   - name: slack-notify
@@ -10,7 +6,7 @@ stages:
       - name: slack-post
         command:
           type: external
-          image: kuzoo-scripts:0.1.0
+          image: gvbusa/kuzoo-scripts:0.1.2
           cluster: my-first-cluster
           namespace: batch
           run: [ "./slack-post.sh" ]
