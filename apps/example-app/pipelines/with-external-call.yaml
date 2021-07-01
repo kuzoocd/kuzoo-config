@@ -6,7 +6,7 @@ stages:
       - name: slack-post
         command:
           type: external
-          image: gvbusa/kuzoo-scripts:0.1.2
+          image: gvbusa/kuzoo-scripts:0.1.0
           cluster: my-first-cluster
           namespace: batch
           run: [ "./slack-post.sh" ]
