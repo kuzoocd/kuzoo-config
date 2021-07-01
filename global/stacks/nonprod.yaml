@@ -27,3 +27,7 @@ resources:
   requests:
     cpu: 100m
     memory: 128Mi
+
+env:
+  - name: ENV_TYPE
+    value: nonprod

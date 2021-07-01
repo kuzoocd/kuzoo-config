@@ -2,3 +2,6 @@
 from: deploy-to-nonprod.yaml
 
 # overrides
+# stages are merged based on the "order" property - a stage with order matching one in the parent
+# pipeline will be overriden, a stage with order not matching will be added and placed so that the
+# merged stages will be in "order"
