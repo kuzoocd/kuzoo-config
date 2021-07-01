@@ -4,7 +4,7 @@ namespace: dev
 chart:
   provider: helmChartRepo1
   type: example
-  version: 0.1.1
+  version: 0.1.2
 
 # app config
 replicaCount: 1

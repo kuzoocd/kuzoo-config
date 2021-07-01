@@ -1,0 +1,15 @@
+image:
+  provider: dockerhub1
+  regex: .*
+
+stages:
+
+  - name: deploy-canary
+    order: 10
+    steps:
+      - name: deploy-canary
+        command:
+          type: deploy-canary
+          stack: dev
+          replicas: 1
+          timeout: 120
