@@ -67,5 +67,4 @@ stages:
         command:
           type: deploy
           stack: dev
-          replicas: 1
           timeout: 120
