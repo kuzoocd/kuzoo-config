@@ -34,7 +34,7 @@ stages:
           value: yes
         command:
           type: deploy-canary
-          stack: brand1-prod
+          stack: dev
           replicas: 1
           timeout: 120
 
@@ -64,10 +64,10 @@ stages:
           stack: dev
           timeout: 120
 
-  - name: deploy-prod
+  - name: deploy-dev
     order: 60
     steps:
-      - name: deploy-brand1-prod
+      - name: deploy-to-dev
         condition:
           type: choice
           stage: deploy-choice
@@ -75,17 +75,7 @@ stages:
           value: yes
         command:
           type: deploy
-          stack: brand1-prod
-          timeout: 120
-      - name: deploy-brand2-prod
-        condition:
-          type: choice
-          stage: deploy-choice
-          step: deploy-choice
-          value: yes
-        command:
-          type: deploy
-          stack: brand2-prod
+          stack: dev
           timeout: 120
 
 notifications:
