@@ -1,5 +1,5 @@
 image:
-  regex: master-.*
+  regex: .*
 
 stages:
 
