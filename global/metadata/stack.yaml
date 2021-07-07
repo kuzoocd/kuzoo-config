@@ -1,0 +1,6 @@
+# stack metadata settings that apply to all application stacks
+chart:
+  provider: mycharts
+image:
+  provider: myimages
+  regex: .*

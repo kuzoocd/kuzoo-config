@@ -1,10 +1,18 @@
 image:
-  provider: dockerhub1
-  regex: .*
+  regex: master-.*
 
 stages:
 
+  - name: approve
+    order: 10
+    steps:
+      - name: approve-pipeline
+        command:
+          type: approve
+          timeout: 3600
+
   - name: canary-choice
+    order: 20
     steps:
       - name: canary-choice
         command:
@@ -16,7 +24,7 @@ stages:
           timeout: 600
 
   - name: deploy-canary
-    order: 10
+    order: 30
     steps:
       - name: deploy-canary
         condition:
@@ -26,11 +34,12 @@ stages:
           value: yes
         command:
           type: deploy-canary
-          stack: dev
+          stack: brand1-prod
           replicas: 1
           timeout: 120
 
   - name: deploy-choice
+    order: 40
     steps:
       - name: deploy-choice
         command:
@@ -42,7 +51,7 @@ stages:
           timeout: 600
 
   - name: undeploy-canary
-    order: 10
+    order: 50
     steps:
       - name: undeploy-canary
         condition:
@@ -55,10 +64,10 @@ stages:
           stack: dev
           timeout: 120
 
-  - name: deploy-dev
-    order: 10
+  - name: deploy-prod
+    order: 60
     steps:
-      - name: deploy-dev
+      - name: deploy-brand1-prod
         condition:
           type: choice
           stage: deploy-choice
@@ -66,5 +75,20 @@ stages:
           value: yes
         command:
           type: deploy
-          stack: dev
+          stack: brand1-prod
           timeout: 120
+      - name: deploy-brand2-prod
+        condition:
+          type: choice
+          stage: deploy-choice
+          step: deploy-choice
+          value: yes
+        command:
+          type: deploy
+          stack: brand2-prod
+          timeout: 120
+
+notifications:
+  enabled: true
+  events: started,blocked,finished
+  channels: devops,engineering

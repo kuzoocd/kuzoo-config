@@ -1,0 +1,7 @@
+# pipeline metadata settings that apply to all application stacks
+image:
+  provider: myimages
+  regex: .*
+notifications:
+  provider: myslack
+  enabled: false

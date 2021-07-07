@@ -1,1 +1,2 @@
-# settings that apply to all apps in this cluster
+# stack settings that apply to all application stacks deployed in this cluster
+domain: my-first-cluster.mycompany.com

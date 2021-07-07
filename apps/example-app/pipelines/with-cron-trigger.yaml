@@ -6,7 +6,8 @@ trigger:
   name: hourly
   type: cron
   enabled: false
-  expr: 0 */3 * * * *
+  expr: 0 0 * * * *
+  tz: America/Chicago
   build: 0.1.8
 
 notifications:
