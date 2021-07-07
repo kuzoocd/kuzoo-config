@@ -34,7 +34,7 @@ stages:
           value: yes
         command:
           type: deploy-canary
-          stack: dev-bla
+          stack: dev
           replicas: 1
           timeout: 120
 
