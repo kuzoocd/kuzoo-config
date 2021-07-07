@@ -1,7 +1,7 @@
 # pipeline metadata settings that apply to all application stacks
 image:
-  provider: myimages
+  provider: dockerhub1
   regex: .*
 notifications:
-  provider: myslack
+  provider: slack1
   enabled: false

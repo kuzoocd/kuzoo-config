@@ -1,6 +1,6 @@
 # stack metadata settings that apply to all application stacks
 chart:
-  provider: mycharts
+  provider: helmChartRepo1
 image:
-  provider: myimages
+  provider: dockerhub1
   regex: .*

@@ -1,7 +1,6 @@
 # stages are executed sequentially, all steps in a stage are executed in parallel
 
 image:
-  provider: dockerhub1
   regex: .*
 
 stages:
@@ -26,5 +25,4 @@ stages:
 notifications:
   enabled: false
   events: started,finished
-  provider: slack1
   channels: devops
