@@ -12,7 +12,7 @@ image:
   regex: .*
 
 service:
-  type:
+  type: ClusterIP
   port: 80
   internalPort: 8080
   healthCheckPath: /healthz
