@@ -1,9 +1,9 @@
 # metadata
 cluster: my-first-cluster
 namespace: dev
-# chart:
-#   type: example
-#   version: 0.1.2
+chart:
+  type: example
+  version: 0.1.2
 
 # app config
 replicaCount: 1

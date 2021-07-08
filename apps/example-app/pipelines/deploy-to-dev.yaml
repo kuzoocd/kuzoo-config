@@ -1,4 +1,4 @@
 # inherit from global/pipelines
-from: deploy-to-nonprod.yaml
+from: deploy-to-nonprodx.yaml
 
 # overrides
