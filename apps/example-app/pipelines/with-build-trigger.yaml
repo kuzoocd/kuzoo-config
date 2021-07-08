@@ -6,7 +6,7 @@ trigger:
   name: onbuild
   type: build
   enabled: false
-  #regex: .*
+  regex: .*
 
 
 notifications:

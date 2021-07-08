@@ -4,4 +4,5 @@ image:
   regex: .*
 notifications:
   provider: slack1
+  type: slack
   enabled: false

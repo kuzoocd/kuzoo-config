@@ -7,7 +7,7 @@ trigger:
   type: cron
   enabled: false
   expr: 0 0 * * *
-  tz: America/Chicag
+  tz: America/Chicago
   build: 0.1.8
 
 notifications:
