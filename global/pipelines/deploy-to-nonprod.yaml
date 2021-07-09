@@ -22,6 +22,15 @@ stages:
           stack: dev
           timeout: 120
 
+  - name: deploy-in-parallel
+    order: 20
+    steps:
+      - name: deploy-in-parallel
+        command:
+          type: deploy
+          stack: dev
+          timeout: 120
+
 notifications:
   enabled: false
   events: started,finished
