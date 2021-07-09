@@ -23,7 +23,7 @@ stages:
           timeout: 120
 
   - name: deploy-in-parallel
-    order: 20
+    order: 30
     steps:
       - name: deploy-in-parallel
         command:
