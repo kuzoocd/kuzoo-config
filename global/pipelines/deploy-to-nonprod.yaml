@@ -21,10 +21,6 @@ stages:
           type: deploy
           stack: dev
           timeout: 120
-
-  - name: deploy-in-parallel
-    order: 30
-    steps:
       - name: deploy-in-parallel
         command:
           type: deploy
