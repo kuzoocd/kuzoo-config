@@ -28,6 +28,6 @@ stages:
           timeout: 120
 
 notifications:
-  enabled: false
+  enabled: true
   events: started,finished
   channels: devops
