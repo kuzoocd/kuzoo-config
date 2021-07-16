@@ -2,4 +2,3 @@
 from: nonprod.yaml
 
 # overrides
-replicaCount: 2
