@@ -1,6 +1,6 @@
 # metadata
 cluster: my-first-cluster
-namespace: dev
+namespace: gvbusa-dev
 chart:
   type: example
   version: 0.1.2

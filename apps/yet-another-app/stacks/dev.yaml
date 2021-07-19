@@ -1,5 +1,5 @@
 # inherit from global/stacks
-from: nonprod.yaml
+from: node-app-dev.yaml
 
 # overrides
 # env values array is merged on the basis of "name" property - i.e. env element with a name

@@ -1,4 +1,4 @@
 # inherit from global/pipelines
-from: node-app-deploy-to-dev.yaml
+from: node-app-deploy-to-prod.yaml
 
 # overrides

@@ -1,4 +1,4 @@
 # inherit from global/stacks
-from: node-app-dev.yaml
+from: node-app-prod.yaml
 
 # overrides

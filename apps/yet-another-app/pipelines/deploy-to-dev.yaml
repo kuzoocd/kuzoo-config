@@ -1,5 +1,5 @@
 # inherit from global/pipelines
-from: deploy-to-nonprod.yaml
+from: node-app-deploy-to-dev.yaml
 
 # overrides
 # stages are merged based on the "order" property - a stage with order matching one in the parent

@@ -34,7 +34,7 @@ stages:
           value: yes
         command:
           type: deploy-canary
-          stack: dev
+          stack: prod
           replicas: 1
           timeout: 120
 
@@ -61,7 +61,7 @@ stages:
           value: yes
         command:
           type: undeploy-canary
-          stack: dev
+          stack: prod
           timeout: 120
 
   - name: deploy-dev
@@ -75,10 +75,10 @@ stages:
           value: yes
         command:
           type: deploy
-          stack: dev
+          stack: prod
           timeout: 120
 
 notifications:
-  enabled: true
+  enabled: false
   events: started,blocked,finished
   channels: devops,engineering
