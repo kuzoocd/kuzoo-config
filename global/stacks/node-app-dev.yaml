@@ -3,7 +3,7 @@ cluster: my-first-cluster
 namespace: gvbusa
 chart:
   type: example
-  version: 0.1.5
+  version: 0.1.4
 
 # app config
 replicaCount: 1
