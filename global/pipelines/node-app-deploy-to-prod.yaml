@@ -64,10 +64,10 @@ stages:
           stack: prod
           timeout: 120
 
-  - name: deploy-dev
+  - name: deploy-prod
     order: 60
     steps:
-      - name: deploy-to-dev
+      - name: deploy-to-prod
         condition:
           type: choice
           stage: deploy-choice
