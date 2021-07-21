@@ -62,7 +62,7 @@ stages:
         command:
           type: undeploy-canary
           stack: prod
-          timeout: 120
+          timeout: 600
 
   - name: deploy-prod
     order: 60
@@ -76,7 +76,7 @@ stages:
         command:
           type: deploy
           stack: prod
-          timeout: 120
+          timeout: 600
 
 notifications:
   enabled: false
