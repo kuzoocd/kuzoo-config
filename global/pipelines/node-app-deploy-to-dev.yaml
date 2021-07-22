@@ -10,7 +10,7 @@ stages:
         command:
           type: deploy
           stack: dev
-          timeout: 120
+          timeout: 10
 
 notifications:
   enabled: false
