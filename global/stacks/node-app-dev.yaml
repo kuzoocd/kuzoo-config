@@ -4,6 +4,7 @@ namespace: gvbusa
 chart:
   type: example
   version: 0.1.7
+pipelineOnlyDeployment: false
 
 # app config
 replicaCount: 1
