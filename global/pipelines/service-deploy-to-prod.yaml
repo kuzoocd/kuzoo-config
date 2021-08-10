@@ -1,0 +1,84 @@
+image:
+  regex: .*
+
+stages:
+
+  - name: approve
+    order: 10
+    steps:
+      - name: approve-pipeline
+        command:
+          type: approve
+          timeout: 3600
+
+  - name: canary-choice
+    order: 20
+    steps:
+      - name: canary-choice
+        command:
+          type: choice
+          message: Deploy canary?
+          choices:
+            - yes
+            - no
+          timeout: 600
+
+  - name: deploy-canary
+    order: 30
+    steps:
+      - name: deploy-canary
+        condition:
+          type: choice
+          stage: canary-choice
+          step: canary-choice
+          value: yes
+        command:
+          type: deploy-canary
+          stack: prod
+          replicas: 1
+          timeout: 120
+
+  - name: deploy-choice
+    order: 40
+    steps:
+      - name: deploy-choice
+        command:
+          type: choice
+          message: Deploy new build?
+          choices:
+            - yes
+            - no
+          timeout: 600
+
+  - name: undeploy-canary
+    order: 50
+    steps:
+      - name: undeploy-canary
+        condition:
+          type: choice
+          stage: canary-choice
+          step: canary-choice
+          value: yes
+        command:
+          type: undeploy-canary
+          stack: prod
+          timeout: 600
+
+  - name: deploy-prod
+    order: 60
+    steps:
+      - name: deploy-to-prod
+        condition:
+          type: choice
+          stage: deploy-choice
+          step: deploy-choice
+          value: yes
+        command:
+          type: deploy
+          stack: prod
+          timeout: 600
+
+notifications:
+  enabled: false
+  events: started,blocked,finished
+  channels: devops,engineering

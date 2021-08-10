@@ -1,0 +1,18 @@
+image:
+  regex: .*
+
+stages:
+
+  - name: deploy
+    order: 10
+    steps:
+      - name: deploy-to-dev
+        command:
+          type: deploy
+          stack: dev
+          timeout: 120
+
+notifications:
+  enabled: false
+  events: started,finished
+  channels: devops,engineering
