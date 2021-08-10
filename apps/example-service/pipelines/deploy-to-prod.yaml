@@ -1,4 +1,4 @@
 # inherit from global/pipelines
-from: webapp-deploy-to-prod.yaml
+from: service-deploy-to-prod.yaml
 
 # overrides

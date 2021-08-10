@@ -1,7 +1,0 @@
-# inherit from global/stacks
-from: node-app-dev.yaml
-
-# overrides
-# env values array is merged on the basis of "name" property - i.e. env element with a name
-# matching one in parent stack will have its value overridden, env element without a name match
-# will be added

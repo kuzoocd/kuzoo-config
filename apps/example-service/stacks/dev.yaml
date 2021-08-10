@@ -1,4 +1,4 @@
 # inherit from global/stacks
-from: webapp-dev.yaml
+from: service-dev.yaml
 
 # overrides

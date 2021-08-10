@@ -1,0 +1,35 @@
+# metadata
+cluster: my-first-cluster
+namespace: gvbusa
+chart:
+  type: example
+  version: 0.1.7
+pipelineOnlyDeployment: false
+
+# app config
+replicaCount: 1
+
+image:
+  regex: .*
+
+service:
+  type: ClusterIP
+  port: 80
+  internalPort: 8080
+  healthCheckPath: /
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+ingress:
+  enabled: true
+  public: false
+  
+env:
+  - name: ENV_TYPE
+    value: nonprod
