@@ -1,0 +1,23 @@
+# metadata
+cluster: my-first-cluster
+namespace: gvbusa
+chart:
+  type: example-job
+  version: 0.1.0
+pipelineOnlyDeployment: false
+
+# job config
+image:
+  regex: .*
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+env:
+  - name: ENV_TYPE
+    value: nonprod

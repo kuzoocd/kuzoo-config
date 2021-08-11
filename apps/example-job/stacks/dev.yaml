@@ -1,0 +1,4 @@
+# inherit from global/stacks
+from: job-dev.yaml
+
+# overrides
