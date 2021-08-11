@@ -3,7 +3,7 @@ cluster: my-first-cluster
 namespace: gvbusa
 chart:
   type: example-job
-  version: 0.1.1
+  version: 0.1.2
 pipelineOnlyDeployment: false
 
 # job config
