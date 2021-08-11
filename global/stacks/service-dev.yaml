@@ -4,6 +4,7 @@ namespace: gvbusa
 chart:
   type: example
   version: 0.1.7
+workloadType: deployment
 pipelineOnlyDeployment: false
 
 # app config
@@ -29,7 +30,7 @@ resources:
 ingress:
   enabled: true
   public: false
-  
+
 env:
   - name: ENV_TYPE
     value: nonprod
