@@ -6,6 +6,7 @@ chart:
   version: 0.1.3
 workloadType: job
 pipelineOnlyDeployment: false
+timeoutSecs: 660
 
 # job config
 image:

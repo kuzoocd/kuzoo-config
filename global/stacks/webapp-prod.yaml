@@ -6,6 +6,7 @@ chart:
   version: 0.1.7
 workloadType: deployment
 pipelineOnlyDeployment: true
+timeoutSecs: 660
 
 # app config
 replicaCount: 1

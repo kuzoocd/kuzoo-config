@@ -21,7 +21,7 @@ stages:
           choices:
             - yes
             - no
-          timeout: 600
+          timeout: 120
 
   - name: deploy-canary
     order: 30
@@ -36,7 +36,7 @@ stages:
           type: deploy-canary
           stack: prod
           replicas: 1
-          timeout: 120
+          timeout: 720
 
   - name: deploy-choice
     order: 40
@@ -76,7 +76,7 @@ stages:
         command:
           type: deploy
           stack: prod
-          timeout: 600
+          timeout: 720
 
 notifications:
   enabled: false
